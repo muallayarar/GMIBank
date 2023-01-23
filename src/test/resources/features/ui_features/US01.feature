@@ -2,6 +2,7 @@
 Feature: US01_System should allow any user to register with valid credentials
 
   Background:
+    Given User goes to Url
     Given User clicks Register Button
     Then User verifies Registration Page
 
