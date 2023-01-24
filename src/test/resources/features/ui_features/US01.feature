@@ -15,7 +15,7 @@ Feature: US01_System should allow any user to register with valid credentials
     Then User verifies system put '-' between digits automatically
     When User enters 8 digit SSN in the SSN Box and clicks next box
     Then User verifies "Ssn is invalid." message is displayed under SSN Box
-    When User enters 10 digit SSN in the SSN Box and clicks next box
+    When User enters on digit SSN in the SSN Box and clicks next box
     Then User verifies system doesn't accept 10. digit
     When User enters only char in the SSN Box and clicks next box
     Then User verifies system doesn't accept any char
@@ -23,6 +23,16 @@ Feature: US01_System should allow any user to register with valid credentials
     Then User verifies system doesn't accept any sepacial character
     When User enters a valid SSN in the SSN Box and clicks next box
     Then User verifies any error message is not displayed
+    When User enters a invalid SSN in the SSN Box and clicks next box
+    | invalid |
+    | 908451245  |
+    | 666451245  |
+    | 000451245  |
+    | 123001245  |
+    | 123785678  |
+    | 123780000  |
+
+
 
   @US_01-TC_02_First_Name_Box_Testing
   Scenario: US_01-TC_02_First_Name_Box_Testing

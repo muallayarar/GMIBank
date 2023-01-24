@@ -11,6 +11,9 @@ package stepdefinitions.uistepdefs;
     import utilities.JSUtils;
     import utilities.ReusableMethods;
 
+    import java.util.List;
+    import java.util.Map;
+
 public class US01_StepDefs {
 
         RegistrationPage registrationPage=new RegistrationPage();
@@ -23,7 +26,7 @@ public class US01_StepDefs {
         public void user_clicks_register_button() {
           registrationPage.accountIcon.click();
           registrationPage.registerButton.click();
-          Driver.wait(3);
+          //Driver.wait(3);
         }
         @Then("User verifies Registration Page")
         public void userVerifiesRegistrationPage() {
@@ -37,24 +40,24 @@ public class US01_StepDefs {
         @Then("User verifies {string} message is displayed")
         public void user_verifies_message_is_displayed(String message) {
          Assert.assertEquals(message, registrationPage.ssnBoxEmptyAlertText.getText());
-         ReusableMethods.waitFor(3);
+         //ReusableMethods.waitFor(3);
         }
         @Given("User enters {int} digit SSN in the SSN Box without {string} and clicks next box")
         public void user_enters_digit_ssn_in_the_ssn_box_without_and_clicks_next_box(Integer int1, String string) {
             registrationPage.ssnBox.click();
             registrationPage.ssnBox.sendKeys("123456789");
-            Driver.wait(3);
+            //Driver.wait(3);
         }
         @Then("User verifies system put {string} between digits automatically")
         public void user_verifies_system_put_between_digits_automatically(String string) {
                 String ssnId=registrationPage.ssnBox.getAttribute("value");
                 Assert.assertEquals("123-45-6789", ssnId);
-                Driver.wait(3);
+                //Driver.wait(3);
         }
         @When("User enters {int} digit SSN in the SSN Box and clicks next box")
         public void user_enters_digit_ssn_in_the_ssn_box_and_clicks_next_box(Integer int1) {
                 registrationPage.ssnBox.clear();
-                Driver.wait(3);
+                //Driver.wait(3);
                 registrationPage.ssnBox.sendKeys("12345678");
                 registrationPage.firstNameBox.click();
 
@@ -63,32 +66,69 @@ public class US01_StepDefs {
         public void user_verifies_message_is_displayed_under_ssn_box(String string) {
             Assert.assertTrue(registrationPage.ssnInvalidAlertText.isDisplayed());
         }
+        @When("User enters on digit SSN in the SSN Box and clicks next box")
+        public void userEntersOnDigitSSNInTheSSNBoxAndClicksNextBox() {
+                registrationPage.ssnBox.clear();
+                //Driver.wait(3);
+                registrationPage.ssnBox.sendKeys("1234567890");
+                registrationPage.firstNameBox.click();
+        }
+
         @Then("User verifies system doesn't accept {int}. digit")
         public void user_verifies_system_doesn_t_accept_digit(Integer int1) {
+                String ssnId=registrationPage.ssnBox.getAttribute("value");
+                ssnId= ssnId.replace("-","");
+                System.out.println("ssnId Length:" + ssnId.length());
+                Assert.assertEquals(9,ssnId.length());
+                //Driver.wait(3);
 
         }
         @When("User enters only char in the SSN Box and clicks next box")
         public void user_enters_only_char_in_the_ssn_box_and_clicks_next_box() {
-
+                registrationPage.ssnBox.clear();
+                //Driver.wait(3);
+                registrationPage.ssnBox.sendKeys("aaaaaaaaa");
+                registrationPage.ssnBox.click();
         }
         @Then("User verifies system doesn't accept any char")
         public void user_verifies_system_doesn_t_accept_any_char() {
-
+                Assert.assertTrue(registrationPage.ssnBox.getAttribute("value").isEmpty());
         }
         @When("User enters only symbols in the SSN Box and clicks next box")
         public void user_enters_only_symbols_in_the_ssn_box_and_clicks_next_box() {
-
+                registrationPage.ssnBox.clear();
+                 Driver.wait(3);
+                registrationPage.ssnBox.sendKeys(".*??????!");
+                registrationPage.ssnBox.click();
         }
         @Then("User verifies system doesn't accept any sepacial character")
         public void user_verifies_system_doesn_t_accept_any_sepacial_character() {
-
+                Assert.assertTrue(registrationPage.ssnBox.getAttribute("value").isEmpty());
         }
         @When("User enters a valid SSN in the SSN Box and clicks next box")
         public void user_enters_a_valid_ssn_in_the_ssn_box_and_clicks_next_box() {
-
+                registrationPage.ssnBox.clear();
+                Driver.wait(3);
+                registrationPage.ssnBox.sendKeys("345-67-6788");
+                registrationPage.ssnBox.click();
         }
+
+        @When("User enters a invalid SSN in the SSN Box and clicks next box")
+        public void user_enters_a_invalid_ssn_in_the_ssn_box_and_clicks_next_box(io.cucumber.datatable.DataTable invalidSsn) {
+                List<Map<String,String>> invalid= invalidSsn.asMaps(String,String );
+                System.out.println("ssn numbers"+invalid.toString());
+                for (Map<String,String> each : invalid){
+                        registrationPage.ssnBox.clear();
+                        registrationPage.ssnBox.sendKeys(each.get("invalid"));
+                        Assert.assertEquals("Ssn is invalid.",registrationPage.ssnInvalidAlertText);
+                        registrationPage.firstNameBox.click();
+                }
+        }
+
+
         @Then("User verifies any error message is not displayed")
         public void user_verifies_any_error_message_is_not_displayed() {
+
 
         }
 
@@ -212,4 +252,4 @@ public class US01_StepDefs {
 
 
 
-    }
+}
