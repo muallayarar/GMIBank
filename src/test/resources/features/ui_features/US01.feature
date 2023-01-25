@@ -23,14 +23,19 @@ Feature: US01_System should allow any user to register with valid credentials
     Then User verifies system doesn't accept any sepacial character
     When User enters a valid SSN in the SSN Box and clicks next box
     Then User verifies any error message is not displayed
-    When User enters a invalid SSN in the SSN Box and clicks next box
-    | invalid |
-    | 908451245  |
-    | 666451245  |
-    | 000451245  |
-    | 123001245  |
-    | 123785678  |
-    | 123780000  |
+    When User enters valid SSN in the SSN Box and clicks next box
+      |   valid SSN       |
+      |   123412347      |
+      |   324523556      |
+      |   721112576      |
+    When User enters invalid SSN in the SSN Box and clicks next box
+      |   Invalid SSN   |
+      |   12345678      |
+      |   000344556     |
+      |   123001234     |
+      |   123120000     |
+      |   912121234     |
+
 
 
 

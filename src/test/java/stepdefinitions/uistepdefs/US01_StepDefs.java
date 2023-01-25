@@ -110,17 +110,27 @@ public class US01_StepDefs {
                 registrationPage.ssnBox.clear();
                 Driver.wait(3);
                 registrationPage.ssnBox.sendKeys("345-67-6788");
-                registrationPage.ssnBox.click();
+                //registrationPage.ssnBox.click();
         }
 
-        @When("User enters a invalid SSN in the SSN Box and clicks next box")
-        public void user_enters_a_invalid_ssn_in_the_ssn_box_and_clicks_next_box(io.cucumber.datatable.DataTable invalidSsn) {
-                List<Map<String,String>> invalid= invalidSsn.asMaps(String,String );
-                System.out.println("ssn numbers"+invalid.toString());
-                for (Map<String,String> each : invalid){
+        @When("User enters valid SSN in the SSN Box and clicks next box")
+        public void user_enters_valid_ssn_in_the_ssn_box_and_clicks_next_box(io.cucumber.datatable.DataTable credentials) {
+                List<Map<String,String>> customerCredentials = credentials.asMaps(String.class,String.class);
+
+                for (Map<String,String> each : customerCredentials){
                         registrationPage.ssnBox.clear();
-                        registrationPage.ssnBox.sendKeys(each.get("invalid"));
-                        Assert.assertEquals("Ssn is invalid.",registrationPage.ssnInvalidAlertText);
+                        registrationPage.ssnBox.sendKeys(each.get("valid SSN"));
+                        registrationPage.firstNameBox.click();
+                }
+        }
+        @When("User enters invalid SSN in the SSN Box and clicks next box")
+        public void user_enters_invalid_ssn_in_the_ssn_box_and_clicks_next_box(io.cucumber.datatable.DataTable credentials) {
+                List<Map<String,String>> customerCredentials = credentials.asMaps(String.class,String.class);
+
+                for (Map<String,String> each : customerCredentials){
+                        registrationPage.ssnBox.clear();
+                        registrationPage.ssnBox.sendKeys(each.get("Invalid SSN"));
+                        Assert.assertTrue(registrationPage.ssnInvalidAlertText.getText().contains("invalid"));
                         registrationPage.firstNameBox.click();
                 }
         }
