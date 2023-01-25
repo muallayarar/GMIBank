@@ -30,8 +30,10 @@ package pages;
         @FindBy(xpath = "//*[@id='firstname']")
         public WebElement firstNameBox;
 
-        @FindBy(xpath = "Please enter your first name.")
+        @FindBy(xpath = "//*[text()='Please enter your first name.']")
         public WebElement firstNameBoxEmptyAlertText;
+
+
 
         @FindBy(xpath = "//*[@id='lastname']")
         public WebElement lastNameBox;

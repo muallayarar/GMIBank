@@ -36,16 +36,13 @@ Feature: US01_System should allow any user to register with valid credentials
       |   123120000     |
       |   912121234     |
 
-
-
-
   @US_01-TC_02_First_Name_Box_Testing
   Scenario: US_01-TC_02_First_Name_Box_Testing
     Given User enters a valid SSN in the SSN Box and clicks next box
     Then User clicks First Name Box and clicks next box
-    And User verifies "Please enter your first name." message is displayed
+    And User verifies "Please enter your first name." message is displayed in firstName
     When User enters only symbols in the First Name Box and clicks next box
-    Then User verifies "Your first name is invalid" message is displayed
+    Then User verifies "Your first name is invalid" message is displayed invalid FirstName
     When User enters only digital numbers in First Name Box and clicks next box
     Then User verifies "Your first name is invalid" message is displayed
     When User enters chars with digital numbers and clicks next box
