@@ -15,7 +15,7 @@ import org.junit.runner.RunWith;
         },
         features = "./src/test/resources/features/ui_features",
         glue = {"stepdefinitions","hooks"},
-        tags = "@US_01-TC_01_SSN_Box_Testing",
+        tags = "@US_01-TC_06_Email_Box_Testing",
         dryRun =false
 )
 public class Runner {

@@ -44,9 +44,9 @@ Feature: US01_System should allow any user to register with valid credentials
     When User enters only symbols in the First Name Box and clicks next box
     Then User verifies "Your first name is invalid" message is displayed invalid FirstName
     When User enters only digital numbers in First Name Box and clicks next box
-    Then User verifies "Your first name is invalid" message is displayed
+    Then User verifies "Your first name is invalid" message is displayed invalid FirstName
     When User enters chars with digital numbers and clicks next box
-    Then User verifies "Your first name is invalid" message is displayed
+    Then User verifies "Your first name is invalid" message is displayed invalid FirstName
     When User enters a valid First Name in First Name Box and clicks next box
     Then User verifies any error message is not displayed
 
@@ -55,15 +55,15 @@ Feature: US01_System should allow any user to register with valid credentials
     Given User enters a valid SSN in the SSN Box and clicks next box
     Then User enters a valid First Name in First Name Box and clicks next box
     And User clicks Last Name Box and clicks next box
-    Then User verifies "Please enter your last name." message is displayed
+    Then User verifies "Please enter your last name." message is displayed Last name box
     When User enters only symbols in the Last Name Box and clicks next box
-    Then User verifies "Your last name is invalid" message is displayed
+    Then User verifies "Your last name is invalid" message is displayed in lastName box
     When User enters only digital numbers in Last Name Box and clicks next box.
-    Then User verifies "Your last name is invalid" message is displayed
-    When User enters chars with digital numbers and clicks next box
-    Then User verifies "Your last name is invalid" message is displayed
+    Then User verifies "Your last name is invalid" message is displayed in lastName box
+    When User enters chars with digital numbers and clicks next box last name
+    Then User verifies "Your last name is invalid" message is displayed in lastName box
     When User enters a valid Last Name in Last Name Box and clicks next box
-    Then User verifies any error message is not displayed
+    Then User verifies any error message is not displayed last name
 
   @US_01-TC_04_Address_Box_Testing
   Scenario: US_01-TC_04_Address_Box_Testing
@@ -71,11 +71,11 @@ Feature: US01_System should allow any user to register with valid credentials
     Then User enters a valid First Name in First Name Box and clicks next box
     And User enters a valid Last Name in Last Name Box and clicks next box
     And User clicks Address Box and clicks next box
-    Then User verifies "Please enter your address." message is displayed
+    Then User verifies "Please enter your address." message is displayed in address box
     When User enters only symbols in the Address Box and clicks next box
-    Then User verifies "Your address is invalid" message is displayed
+    Then User verifies "Your address is invalid" message is displayed addressBox
     When User enters a valid Address in Address Box and clicks next box
-    Then User verifies any error message is not displayed
+    Then User verifies any error message is not displayed addressBox
 
   @US_01-TC_05_Mobilephone_Number_Box_Testing
   Scenario: US_01-TC_05_Mobilephone_Number_Box_Testing
@@ -84,12 +84,12 @@ Feature: US01_System should allow any user to register with valid credentials
     And User enters a valid Last Name in Last Name Box and clicks next box
     And User enters a valid Address in Address Box and clicks next box
     When User clicks Mobilephone Number Box and clicks next box
-    And User verifies "Please enter your mobile phone number." message is displayed
+    And User verifies "Please enter your mobile phone number." message is displayed phoneNumber
     When User enters 10 digit Mobilephone Number without '-' in the Mobilephone Number Box and clicks next box
-    Then User verifies system put '-' between digits automatically
+    Then User verifies system put '-' between digits automatically in phonebox
     When User enters 9 digit Mobilephone Number in the Mobilephone Number Box and clicks next box
     Then User verifies "Your mobile phone number is invalid." message is displayed under Mobilephone Number Box
-    When User enters 11 digit Mobilephone Number in the Mobilephone Number Box and clicks next box
+    When User enters 11 digit Mobilephone Number in the Mobilephone Number Box and clicks next boxx
     Then User verifies system doesn't accept 11. digit Mobilephone Number
     When User enters only char in the  Mobilephone Number Box and clicks next box
     Then User verifies system doesn't accept any char in the Mobilephone Number Box
@@ -106,12 +106,12 @@ Feature: US01_System should allow any user to register with valid credentials
     And User enters a valid Address in Address Box and clicks next box
     And User enters a valid Mobilephone Number in the Mobilephone Number Box and clicks next box
     When User clicks Email Box and clicks next box
-    And User verifies "Please enter your email." message is displayed
-    When User enters an email without -@- and -.com- and clicks next box
-    Then User verifies "Your email is invalid." message is displayed
-    When User enters an email without -@- but with -.com- and clicks next box
-    Then User verifies "Your email is invalid." message is displayed
-    When User enters an email without -.com- but -@- and clicks next box
-    Then User verifies "Your email is invalid." message is displayed
+    And User verifies "Please enter your email." message is displayed email
+    When User enters an email without @ and .com and clicks next box
+    Then User verifies "Your email is invalid." message is displayed in email
+    When User enters an email without @ but with .com and clicks next box
+    Then User verifies "Your email is invalid." message is displayed in email
+    When User enters an email without .com but @ and clicks next box
+    Then User verifies "Your email is invalid." message is displayed in email
     When User enters a valid email in the email box and clicks next box
-    Then User verifies error message is not displayed
+    Then User verifies error message is not displayed email box

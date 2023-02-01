@@ -56,6 +56,13 @@ package pages;
         @FindBy(xpath = "//*[text()='Your mobile phone number is invalid.']")
         public WebElement mobilePhoneNumberInvalidAlertText;
 
+        @FindBy(id = "username")
+        public WebElement userNameBox;
+
+        @FindBy(xpath = "//div[.='Your username is required.']")
+        public WebElement userNameBoxEmptyAlert;
+
+
         @FindBy(xpath = "//*[@id='email']")
         public WebElement emailBox;
 
